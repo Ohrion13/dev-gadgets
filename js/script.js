@@ -8,6 +8,11 @@ const addBtn = document.querySelector('.add-cta');
 let addQty = document.querySelector('.add-qty');
 let cartNumb = document.querySelector('.cart-nb');
 
+const AdvantagesBtn = document.querySelector('.product-acrd-lnk:nth-of-type(1)');
+const FeaturesBtn = document.querySelector('.product-acrd-lnk:nth-of-type(2)');
+const displayAdvantages = document.querySelector('.product-advantages');
+const displayFeatures = document.querySelector('.product-car');
+
 let currentIndex = 0;
 
 
@@ -54,31 +59,49 @@ changeDesktopImage()
 
 
 /**
- * allows by clicking on the button to increase the number of products in the card.
+ * allows by clicking on the button to add the quantity of chosen products then to deactivate the button by changing the text it contains.
 */
 function addProduct() {
     addBtn.addEventListener('click', () => {
 
         let qty = parseInt(addQty.value);
-        
+
         let CartQty = parseInt(cartNumb.innerHTML);
         let newQty = CartQty + qty;
-        
-        cartNumb.innerHTML = newQty;
 
-        if (CartQty > 99) {
-            cartNumb.innerHTML = "99+";
-        }
-        else {
-            cartNumb.innerHTML = newQty
-        }
+        newQty > 99 ? cartNumb.innerHTML = "99+" : cartNumb.innerHTML = newQty
 
-        addBtn.deaseable = true;
+        addBtn.disabled = true;
 
-        addBtn.textContent = "";
+        addBtn.textContent = "Déjà au panier";
 
     });
 };
 
-
 addProduct();
+
+
+/**
+ * allows you to display or not the content of the Advantages by clicking on the corresponding  accordion.
+ */
+function displaysAdvantagesOrNot() {
+
+    AdvantagesBtn.addEventListener('click', () => {
+        AdvantagesBtn.classList.toggle('closed') ? displayAdvantages.style.display = "none" : displayAdvantages.style.display = "contents"
+    });
+}
+
+displaysAdvantagesOrNot();
+
+
+/**
+ * allows you to display or not the content of the characteristics by clicking on the corresponding  accordion.
+ */
+function displaysFeaturesOrNot() {
+
+    FeaturesBtn.addEventListener('click', () => {
+        FeaturesBtn.classList.toggle('closed') ? displayFeatures.style.display = "none" : displayFeatures.style.display = "contents"
+    });
+}
+
+displaysFeaturesOrNot();
